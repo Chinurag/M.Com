@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>EasySyllabi.com</title>
+
+  <link rel="stylesheet" type="text/css" href="styles.css">
+
+
+
+ <style>
+     body {
+      background-color: #222;
+      color: #fff;
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    h1 {
+      text-align: center;
+    }
+
+    p {
+      margin-bottom: 20px;
+    }
+
+    .cta-button {
+      display: inline-block;
+      padding: 10px 20px;
+      background-color: #ff9800;
+      color: #fff;
+      text-decoration: none;
+      border-radius: 4px;
+    }
+
+    .cta-button:hover {
+      background-color: #f57c00;
+    }
+  </style>
+
+
+
+
+
+</head>
+<body>
+  <!-- Content goes here -->
+
+<div class="container">
+<br>
+  <h1>EasySyllabi.com</h1>
+<br>
+<p>A helpfull website for students that helps in covering the syllabus in time.</p>
+<p>Topics are covered in easy Hinglish Language, which helps in understanding the concept easly.</p>
+
+
+
+<br><br><br><br><br>
+  <label for="stream">Select Stream:</label>
+  <select id="stream">
+    <option value="mcom">M.Com</option>
+    <option value="mba">MBA</option>
+  </select>
+
+  <label for="semester">Select Semester:</label>
+  <select id="semester">
+    <!-- Semester options will be dynamically populated based on the selected stream -->
+  </select>
+
+  <label for="subjects">Select Subject:</label>
+  <select id="subjects">
+    <!-- Subject options will be dynamically populated based on the selected semester -->
+  </select>
+<br><br><br><br>
+  
+
+  <button class="cta-button" id="submitBtn">Get Started</button>
+</div>
+
+
+
+
+
+<script>
+  // Get references to the relevant HTML elements
+  const streamSelect = document.getElementById('stream');
+  const semesterSelect = document.getElementById('semester');
+  const subjectSelect = document.getElementById('subjects');
+  const selectedOptionsInput = document.getElementById('selectedOptions');
+  const submitBtn = document.getElementById('submitBtn');
+
+  // Define the available options for each stream and semester
+  const options = {
+    mcom: {
+      semesters: ['1st Semester', '2nd Semester', '3rd Semester', '4th Semester'],
+      subjects: {
+        '1st Semester': ['Income Tax', 'Accounting'],
+        '2nd Semester': ['Corporate Finance Accounting', 'Marketing', 'Human Resource Management'],
+        // Add subjects for other semesters in M.Com
+      }
+    },
+    mba: {
+      semesters: ['1st Semester', '2nd Semester', '3rd Semester'],
+      subjects: {
+        '1st Semester': ['Subject 1', 'Subject 2'],
+        '2nd Semester': ['Subject 3', 'Subject 4'],
+        // Add subjects for other semesters in MBA
+      }
+    }
+  };
+
+  // Populate semester dropdown based on the selected stream
+  streamSelect.addEventListener('change', function() {
+    const selectedStream = this.value;
+    const semesterOptions = options[selectedStream].semesters;
+    populateDropdown(semesterSelect, semesterOptions);
+  });
+
+  // Populate subject dropdown based on the selected semester
+  semesterSelect.addEventListener('change', function() {
+    const selectedStream = streamSelect.value;
+    const selectedSemester = this.value;
+    const subjectOptions = options[selectedStream].subjects[selectedSemester];
+    populateDropdown(subjectSelect, subjectOptions);
+  });
+
+  // Display selected options in the input box
+  submitBtn.addEventListener('click', function() {
+    const selectedStream = streamSelect.value;
+    const selectedSemester = semesterSelect.value;
+    const selectedSubject = subjectSelect.value;
+    selectedOptionsInput.value = `${selectedStream}, ${selectedSemester}, ${selectedSubject}`;
+  });
+
+  // Helper function to populate a dropdown with options
+  function populateDropdown(dropdown, options) {
+    dropdown.innerHTML = '';
+    options.forEach(function(option) {
+      const optionElement = document.createElement('option');
+      optionElement.textContent = option;
+      dropdown.appendChild(optionElement);
+    });
+  }
+
+
+
+
+
+
+  // ...
+
+  // Redirect to the appropriate web page based on the selected options
+  submitBtn.addEventListener('click', function() {
+    const selectedStream = streamSelect.value;
+    const selectedSemester = semesterSelect.value;
+    const selectedSubject = subjectSelect.value;
+
+    // Build the URL based on the selected options
+    let url = 'file:///C:/Users/Genius/Desktop/';
+
+    if (selectedStream === 'mcom') {
+      url += 'M.Com/';
+    } else if (selectedStream === 'mba') {
+      url += 'MBA/';
+    }
+
+    url += `${selectedSemester.toLowerCase()}/${selectedSubject.toLowerCase()}.html`;
+
+    // Redirect the user to the generated URL
+    window.location.href = url;
+  });
+
+  // ...
+
+
+</script>
+
+
+
+
+
+
+
+
+</body>
+</html>
