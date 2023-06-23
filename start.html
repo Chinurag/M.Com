@@ -162,14 +162,13 @@
     const selectedSubject = subjectSelect.value;
 
     // Build the URL based on the selected options
-    let url = 'file:///C:/Users/Genius/Desktop/';
+    let url = 'https://chinurag.github.io/';
 
     if (selectedStream === 'mcom') {
       url += 'M.Com/';
     } else if (selectedStream === 'mba') {
       url += 'MBA/';
     }
-
     url += `${selectedSemester.toLowerCase()}/${selectedSubject.toLowerCase()}.html`;
 
     // Redirect the user to the generated URL
