@@ -169,7 +169,7 @@
     } else if (selectedStream === 'mba') {
       url += 'MBA/';
     }
-    url += `${selectedSemester.toLowerCase()}/${selectedSubject.toLowerCase()}.html`;
+    url += `${selectedSemester()}/${selectedSubject()}.html`;
 
     // Redirect the user to the generated URL
     window.location.href = url;
