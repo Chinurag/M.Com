@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>EasySyllabi.com</title>
+  <link rel="stylesheet" type="text/css" href="index.css">
+</head>
+<body>
+  <!-- Slide Menu -->
+  <div id="slide-menu" class="slide-menu">
+    <ul><br><br>
+      <li><a href="https://chinurag.github.io/m/">Home</a></li>
+      <li>
+        <a href="https://www.google.com/search?q=chinurag&rlz=1C1CHBF_enIN1056IN1056&oq=chinurag&aqs=chrome.0.69i59j35i39j69i60l6.3944j0j7&sourceid=chrome&ie=UTF-8">About</a><br><br>
+        <div class="about-section">
+          <img src="C:\Users\Genius\Desktop\mcom\chirag.png" alt="Chirag Sharma">
+          <p><a href="https://www.google.com/search?q=chinurag&rlz=1C1CHBF_enIN1056IN1056&oq=chinurag&aqs=chrome.0.69i59j35i39j69i60l6.3944j0j7&sourceid=chrome&ie=UTF-8">Chirag Sharma</a><br><br></p>
+          <div class="social-links">
+            <a href="https://www.instagram.com/x.chixu/">Instagram</a>
+            <a href="https://www.youtube.com/@Rag_Army_">YouTube</a>
+          </div>
+        </div>
+      </li>
+    </ul>
+  </div>
+
+  <!-- Toggle Button -->
+  <div id="toggle-button" class="toggle-button" onclick="toggleMenu()">&#9776;</div>
+
+  <!-- HTML content -->
+  <div class="container">
+    <br>
+    <h1>EasySyllabi.com</h1>
+    <br>
+    <p>A helpful website for students that helps in covering the syllabus in time.</p>
+    <p>Topics are covered in easy Hinglish Language, which helps in understanding the concept easily.</p>
+
+    <br><br><br><br><br>
+    <label for="stream">Select Stream:</label>
+    <select id="stream">
+      <option value="jmc">JMC</option>
+      <option value="mba">MBA</option>
+      <option value="mcom">M.Com</option>
+    </select>
+
+    <label for="semester">Select Semester:</label>
+    <select id="semester">
+      <!-- Semester options will be dynamically populated based on the selected stream -->
+    </select>
+
+    <label for="subjects">Select Subject:</label>
+    <select id="subjects">
+      <!-- Subject options will be dynamically populated based on the selected semester -->
+    </select>
+    <br><br><br><br>
+
+    <button class="cta-button" id="submitBtn">Get Started</button>
+  </div>
+
+  <script type="text/JavaScript" src="index.js"></script>
+</body>
+</html>

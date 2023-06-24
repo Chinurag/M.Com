@@ -1,0 +1,117 @@
+ /* Slide Out Menu Styles */
+    .slide-menu {
+      position: fixed;
+      top: 0;
+      left: -20%;
+      height: 100%;
+      width: 20%;
+      background-color: #333;
+      z-index: 999;
+      overflow: hidden;
+      transition: left 0.3s ease;
+    }
+
+    .slide-menu.open {
+      left: 0;
+    }
+
+    .slide-menu ul {
+      padding: 20px;
+    }
+
+    .slide-menu li {
+      margin-bottom: 10px;
+    }
+
+    .slide-menu a {
+      color: #fff;
+      text-decoration: none;
+      font-size: 18px;
+    }
+
+    .toggle-button {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      z-index: 1000;
+      color: #fff;
+      font-size: 24px;
+      cursor: pointer;
+    }
+
+    .about-section {
+      text-align: center;
+    }
+
+    .about-section img {
+      width: 150px;
+      height: 200px;
+      border-radius: 7%;
+      margin-bottom: 10px;
+    }
+
+    .about-section p {
+      margin-bottom: 10px;
+    }
+
+    .about-section .social-links {
+      display: flex;
+      justify-content: center;
+    }
+
+    .about-section .social-links a {
+      margin: 0 5px;
+      color: #fff;
+      text-decoration: none;
+    }
+    
+    body {
+      background-color: #222;
+      color: #fff;
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    h1 {
+      text-align: center;
+    }
+
+    p {
+      margin-bottom: 20px;
+    }
+
+    .cta-button {
+      display: inline-block;
+      padding: 10px 20px;
+      background-color: #ff9800;
+      color: #fff;
+      text-decoration: none;
+      border-radius: 4px;
+    }
+
+    .cta-button:hover {
+      background-color: #f57c00;
+    }
+
+    @keyframes fadeOut {
+      0% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      100% {
+        opacity: 0.5;
+        transform: translateY(-100%);
+      }
+    }
+
+    .fade-out {
+      animation: fadeOut 1s ease;
+      animation-fill-mode: forwards;
+    }
