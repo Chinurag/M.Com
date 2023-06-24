@@ -11,15 +11,22 @@
       font-family: Arial, sans-serif;
       padding: 20px;
       display: flex;
-      flex-direction: column; /* Change to column layout for mobile devices */
+      flex-direction: column; /* Change to column layout */
+      align-items: center; /* Center align content */
+      text-align: center; /* Center align text */
     }
 
     .sidebar {
+      position: fixed;
+      top: 0;
+      left: 0;
       background-color: #111;
-      width: 100%; /* Adjust width to fit mobile screen */
+      width: 200px;
       padding: 20px;
-      height: auto; /* Change height to auto for mobile devices */
-      margin-bottom: 20px; /* Add margin at the bottom for spacing */
+      height: 100vh;
+      display: flex;
+      flex-direction: column; /* Change to column layout */
+      justify-content: flex-start; /* Adjust alignment */
     }
 
     .sidebar a {
@@ -30,7 +37,9 @@
     }
 
     .content {
-      margin-left: 0; /* Remove left margin for mobile devices */
+      flex-grow: 1;
+      margin: 0 auto; /* Center align content */
+      max-width: 500px; /* Limit content width */
     }
 
     h1 {
@@ -38,7 +47,7 @@
     }
 
     .progress-bar {
-      width: 100%; /* Adjust width to fit mobile screen */
+      width: 300px;
       height: 20px;
       background-color: #333;
       position: relative;
@@ -65,8 +74,6 @@
       font-size: 14px;
       cursor: pointer;
       transition: color 0.3s;
-      margin-bottom: 10px; /* Add margin at the bottom for spacing */
-      text-align: center; /* Center align the stopwatch */
     }
 
     .stopwatch:hover,
@@ -104,7 +111,7 @@
 
     .task-description {
       display: none;
-      position: fixed;
+      position: absolute;
       top: 0;
       left: 0;
       width: 100%;
@@ -113,6 +120,8 @@
       z-index: 999;
       text-align: left;
       padding: 20px;
+      color: #fff;
+      overflow: auto;
     }
 
     .task-description.active {
@@ -122,17 +131,14 @@
     .task-title {
       font-weight: bold;
       margin-bottom: 5px;
-      color: #fff;
     }
 
     .task-description p {
       margin: 0;
-      color: #fff;
     }
 
     .about-section {
       margin-top: 20px;
-      text-align: center; /* Center align the about section */
     }
 
     .about-section img {
@@ -163,6 +169,7 @@
         <div class="task-description" id="task1-description">
           <div class="task-title">Task 1 Description</div>
           <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+          <button class="close-btn">Close</button> <!-- Added close button -->
         </div>
       </li>
       <li>
@@ -173,6 +180,7 @@
         <div class="task-description" id="task2-description">
           <div class="task-title">Task 2 Description</div>
           <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+          <button class="close-btn">Close</button> <!-- Added close button -->
         </div>
       </li>
       <li>
@@ -183,6 +191,7 @@
         <div class="task-description" id="task3-description">
           <div class="task-title">Task 3 Description</div>
           <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+          <button class="close-btn">Close</button> <!-- Added close button -->
         </div>
       </li>
       <li>
@@ -193,6 +202,7 @@
         <div class="task-description" id="task4-description">
           <div class="task-title">Task 4 Description</div>
           <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+          <button class="close-btn">Close</button> <!-- Added close button -->
         </div>
       </li>
       <li>
@@ -203,32 +213,50 @@
         <div class="task-description" id="task5-description">
           <div class="task-title">Task 5 Description</div>
           <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+          <button class="close-btn">Close</button> <!-- Added close button -->
         </div>
       </li>
     </ul>
     <div class="about-section" id="about">
       <h2>About</h2>
       <p>Chinurag is a web developer and programmer with a passion for creating amazing websites. You can find him on Instagram and YouTube, where he shares his knowledge and tips about web development.</p>
-      <img src="profile.jpg" alt="Chinurag's Photo">
-      <p>Follow Chinurag on:</p>
-      <ul>
-        <li><a href="https://www.instagram.com/chinurag/">Instagram</a></li>
-        <li><a href="https://www.youtube.com/user/chinurag">YouTube</a></li>
-      </ul>
+      <img src="profile.jpg" alt="Profile Picture">
     </div>
   </div>
+
   <script>
-    // Add click event listeners to show/hide task descriptions
-    const tasks = document.querySelectorAll('input[type="checkbox"]');
-    tasks.forEach(task => {
-      const taskId = task.id.split('-')[0];
-      const description = document.getElementById(`${taskId}-description`);
-      task.addEventListener('change', () => {
-        if (task.checked) {
-          description.classList.add('active');
-        } else {
-          description.classList.remove('active');
-        }
+    // Stopwatch functionality
+    const stopwatch = document.querySelector('.stopwatch');
+    let timerId;
+
+    stopwatch.addEventListener('click', () => {
+      stopwatch.classList.toggle('clicked');
+      if (stopwatch.classList.contains('clicked')) {
+        timerId = setInterval(() => {
+          // Your stopwatch logic here
+        }, 1000);
+      } else {
+        clearInterval(timerId);
+      }
+    });
+
+    // Task description functionality
+    const taskDescriptions = document.querySelectorAll('.task-description');
+    const closeButtons = document.querySelectorAll('.close-btn');
+
+    taskDescriptions.forEach((description, index) => {
+      const taskId = index + 1;
+      const checkbox = document.getElementById(`task${taskId}`);
+
+      checkbox.addEventListener('change', () => {
+        description.classList.toggle('active');
+      });
+    });
+
+    closeButtons.forEach((button) => {
+      button.addEventListener('click', () => {
+        const description = button.parentElement;
+        description.classList.remove('active');
       });
     });
   </script>
