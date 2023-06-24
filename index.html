@@ -66,7 +66,7 @@
 <br><br><br><br><br>
   <label for="stream">Select Stream:</label>
   <select id="stream">
-    <option value="jmc">Journalism</option>
+    <option value="jmc">JMC</option>
     <option value="mba">MBA</option>
     <option value="mcom">M.Com</option>
   </select>
@@ -97,7 +97,7 @@
 
   // Define the available options for each stream and semester
   const options = {
-    journalism: {
+    jmc: {
       semesters: ['1st', '2nd', '3rd', '4th'],
       subjects: {
         '1st': ['JMC101','JMC102'],
@@ -173,11 +173,11 @@
     let url = 'https://chinurag.github.io/';
 
     if (selectedStream === 'jmc') {
-      url += 'JMC/';
+      url += 'm/';
     } else if (selectedStream === 'mba') {
-      url += 'MBA/';
+      url += 'm/';
     } else (selectedStream === 'mcom') {
-      url += 'M.Com/';
+      url += 'm/';
     }
     url += `${selectedSemester.toLowerCase()}/${selectedSubject.toLowerCase()}.html`;
 
