@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Unit 1</title>
+  <style>
+    body {
+      background-color: #222;
+      color: #fff;
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
+    }
+    
+    h1 {
+      text-align: center;
+    }
+    
+    ul {
+      list-style-type: none;
+      padding: 0;
+    }
+    
+    li {
+      margin-bottom: 10px;
+    }
+    
+    input[type="checkbox"] {
+      margin-right: 10px;
+    }
+    
+    .progress-bar {
+      background-color: #555;
+      height: 30px;
+      border-radius: 15px;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .progress-bar-inner {
+      height: 100%;
+      width: 0;
+      transition: width 0.5s ease, background-color 0.5s ease;
+    }
+    
+    .progress-bar-text {
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      line-height: 30px;
+      font-weight: bold;
+    }
+    
+    .progress-bar-inner:after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 100%;
+      background-image: linear-gradient(45deg, rgba(255, 255, 255, 0.2) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.2) 50%, rgba(255, 255, 255, 0.2) 75%, transparent 75%, transparent);
+      background-size: 20px 20px;
+      z-index: -1;
+      animation: stripes 2s linear infinite;
+    }
+    
+    @keyframes stripes {
+      0% {
+        background-position: 0 0;
+      }
+      100% {
+        background-position: 40px 0;
+      }
+    }
+  </style>
+  <script>
+    function updateProgressBar() {
+      var checkboxes = document.querySelectorAll('input[type="checkbox"]');
+      var checkedCount = 0;
+      
+      for (var i = 0; i < checkboxes.length; i++) {
+        if (checkboxes[i].checked) {
+          checkedCount++;
+        }
+      }
+      
+      var progressPercentage = (checkedCount / checkboxes.length) * 100;
+      var progressBar = document.getElementById('progress-bar-inner');
+      var progressBarText = document.getElementById('progress-bar-text');
+      progressBar.style.width = progressPercentage + "%";
+      progressBar.style.backgroundColor = getColor(progressPercentage);
+      progressBarText.textContent = progressPercentage + "%";
+    }
+    
+    function getColor(percentage) {
+      var red = Math.floor(255 - (percentage / 100) * 255);
+      var green = Math.floor((percentage / 100) * 255);
+      return "rgb(" + red + ", " + green + ", 0)";
+    }
+  </script>
+</head>
+<body>
+  <h1>Unit 1</h1>
+  <ul>
+    <li>
+      <input type="checkbox" id="task1" onclick="updateProgressBar()">
+      <label for="task1">Task 1</label>
+    </li>
+    <li>
+      <input type="checkbox" id="task2" onclick="updateProgressBar()">
+      <label for="task2">Task 2</label>
+    </li>
+    <li>
+      <input type="checkbox" id="task3" onclick="updateProgressBar()">
+      <label for="task3">Task 3</label>
+    </li>
+    <!-- Add more tasks as needed -->
+  </ul>
+  
+  <div class="progress-bar">
+    <div id="progress-bar-inner" class="progress-bar-inner"></div>
+    <div id="progress-bar-text" class="progress-bar-text"></div>
+  </div>
+</body>
+</html>
