@@ -1,127 +1,91 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Unit 1: Unit Name</title>
   <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
     body {
-      background-color: #222;
-      color: #fff;
       font-family: Arial, sans-serif;
-      padding: 20px;
-      display: flex;
-      flex-direction: column; /* Change to column layout */
-      align-items: center; /* Center align content */
-      text-align: center; /* Center align text */
     }
 
     .sidebar {
+      height: 100vh;
+      width: 0;
       position: fixed;
       top: 0;
       left: 0;
-      background-color: #111;
-      width: 200px;
-      padding: 20px;
-      height: 100vh;
-      display: flex;
-      flex-direction: column; /* Change to column layout */
-      justify-content: flex-start; /* Adjust alignment */
+      background-color: #333;
+      color: #fff;
+      padding: 50px 20px;
+      transition: 0.3s;
+      z-index: 1;
+      overflow-y: auto;
     }
 
     .sidebar a {
       display: block;
       color: #fff;
       text-decoration: none;
-      margin-bottom: 10px;
+      margin-bottom: 20px;
+    }
+
+    .sidebar.active {
+      width: 200px;
     }
 
     .content {
-      flex-grow: 1;
-      margin: 0 auto; /* Center align content */
-      max-width: 500px; /* Limit content width */
-    }
-
-    h1 {
-      font-size: 24px;
+      margin-left: 200px;
+      padding: 20px;
     }
 
     .progress-bar {
-      width: 300px;
       height: 20px;
-      background-color: #333;
-      position: relative;
-      margin: 20px auto;
+      background-color: #f1f1f1;
       border-radius: 10px;
+      margin-bottom: 20px;
+      position: relative;
     }
 
-    .progress-bar .bar {
+    .bar {
       height: 100%;
+      width: 0%;
+      background-color: red;
       border-radius: 10px;
-      transition: width 0.5s, background-color 0.5s;
-      position: relative;
+      transition: width 0.3s ease-in-out;
     }
 
-    .progress-bar .percentage {
+    .percentage {
       position: absolute;
-      top: 50%;
+      top: 0;
       left: 50%;
-      transform: translate(-50%, -50%);
-      font-size: 12px;
+      transform: translateX(-50%);
+      line-height: 20px;
+      color: #fff;
+      font-weight: bold;
     }
 
     .stopwatch {
-      font-size: 14px;
+      font-size: 24px;
+      margin-bottom: 20px;
       cursor: pointer;
-      transition: color 0.3s;
-    }
-
-    .stopwatch:hover,
-    .stopwatch.clicked {
-      color: #f00;
-    }
-
-    .learning-time {
-      display: none;
-      font-size: 18px;
-      margin-top: 20px;
-    }
-
-    .stopwatch:hover + .learning-time,
-    .stopwatch.clicked + .learning-time {
-      display: block;
     }
 
     ul {
       list-style-type: none;
-      padding: 0;
-      margin: 0;
-      text-align: left;
     }
 
     li {
       margin-bottom: 10px;
-      display: flex;
-      align-items: center;
-    }
-
-    input[type="checkbox"] {
-      margin-right: 5px;
     }
 
     .task-description {
       display: none;
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-color: rgba(0, 0, 0, 0.9);
-      z-index: 999;
-      text-align: left;
-      padding: 20px;
-      color: #fff;
-      overflow: auto;
+      padding: 10px;
+      background-color: #f1f1f1;
     }
 
     .task-description.active {
@@ -130,32 +94,28 @@
 
     .task-title {
       font-weight: bold;
-      margin-bottom: 5px;
+      margin-bottom: 10px;
     }
 
-    .task-description p {
-      margin: 0;
-    }
-
-    .about-section {
-      margin-top: 20px;
-    }
-
-    .about-section img {
-      width: 100px;
-      border-radius: 50%;
+    .close-btn {
+      background-color: #333;
+      color: #fff;
+      border: none;
+      padding: 5px 10px;
+      border-radius: 5px;
+      cursor: pointer;
     }
   </style>
 </head>
 <body>
-  <div class="sidebar">
+  <div class="sidebar" id="sidebar">
     <a href="#">Home</a>
     <a href="#about">About</a>
   </div>
   <div class="content">
     <h1>Unit 1: Unit Name</h1>
     <div class="progress-bar">
-      <div class="bar" style="width: 0%; background-color: red;"></div>
+      <div class="bar"></div>
       <div class="percentage">0%</div>
     </div>
     <div class="stopwatch">00:00</div>
@@ -183,67 +143,55 @@
           <button class="close-btn">Close</button> <!-- Added close button -->
         </div>
       </li>
-      <li>
-        <label for="task3">
-          <input type="checkbox" id="task3">
-          Task 3
-        </label>
-        <div class="task-description" id="task3-description">
-          <div class="task-title">Task 3 Description</div>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-          <button class="close-btn">Close</button> <!-- Added close button -->
-        </div>
-      </li>
-      <li>
-        <label for="task4">
-          <input type="checkbox" id="task4">
-          Task 4
-        </label>
-        <div class="task-description" id="task4-description">
-          <div class="task-title">Task 4 Description</div>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-          <button class="close-btn">Close</button> <!-- Added close button -->
-        </div>
-      </li>
-      <li>
-        <label for="task5">
-          <input type="checkbox" id="task5">
-          Task 5
-        </label>
-        <div class="task-description" id="task5-description">
-          <div class="task-title">Task 5 Description</div>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-          <button class="close-btn">Close</button> <!-- Added close button -->
-        </div>
-      </li>
     </ul>
-    <div class="about-section" id="about">
-      <h2>About</h2>
-      <p>Chinurag is a web developer and programmer with a passion for creating amazing websites. You can find him on Instagram and YouTube, where he shares his knowledge and tips about web development.</p>
-      <img src="profile.jpg" alt="Profile Picture">
-    </div>
   </div>
 
   <script>
-    // Stopwatch functionality
+    const sidebar = document.getElementById('sidebar');
+    const progressPercentage = document.querySelector('.percentage');
+    const progressBar = document.querySelector('.bar');
     const stopwatch = document.querySelector('.stopwatch');
+    const taskDescriptions = document.querySelectorAll('.task-description');
+    const closeButtons = document.querySelectorAll('.close-btn');
+
+    // Toggle sidebar
+    function toggleSidebar() {
+      sidebar.classList.toggle('active');
+    }
+
+    // Update progress bar
+    function updateProgressBar(percentage) {
+      progressBar.style.width = percentage + '%';
+      progressPercentage.textContent = percentage + '%';
+    }
+
+    // Stopwatch functionality
     let timerId;
+    let seconds = 0;
+
+    function startStopwatch() {
+      timerId = setInterval(() => {
+        seconds++;
+        const minutes = Math.floor(seconds / 60);
+        const displaySeconds = seconds % 60;
+        stopwatch.textContent = `${minutes.toString().padStart(2, '0')}:${displaySeconds.toString().padStart(2, '0')}`;
+      }, 1000);
+    }
+
+    function stopStopwatch() {
+      clearInterval(timerId);
+    }
 
     stopwatch.addEventListener('click', () => {
       stopwatch.classList.toggle('clicked');
       if (stopwatch.classList.contains('clicked')) {
-        timerId = setInterval(() => {
-          // Your stopwatch logic here
-        }, 1000);
+        startStopwatch();
       } else {
-        clearInterval(timerId);
+        stopStopwatch();
       }
     });
 
     // Task description functionality
-    const taskDescriptions = document.querySelectorAll('.task-description');
-    const closeButtons = document.querySelectorAll('.close-btn');
-
     taskDescriptions.forEach((description, index) => {
       const taskId = index + 1;
       const checkbox = document.getElementById(`task${taskId}`);
