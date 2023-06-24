@@ -4,64 +4,56 @@
   <title>EasySyllabi.com</title>
   <link rel="stylesheet" type="text/css" href="styles.css">
   <style>
-    
-
-
-body {
-
+    body {
       background-color: #222;
-
       color: #fff;
-
-      font-family:
- Arial, sans-serif;
-
+      font-family: Arial, sans-serif;
       margin: 0;
-
       padding: 0;
     }
 
-
-
-    .container 
-{
+    .container {
       max-width: 800px;
       margin: 0 auto;
       padding: 20px;
     }
 
-
     h1 {
       text-align: center;
     }
-
 
     p {
       margin-bottom: 20px;
     }
 
-
     .cta-button {
       display: inline-block;
-
       padding: 10px 20px;
       background-color: #ff9800;
-
       color: #fff;
       text-decoration: none;
       border-radius: 4px;
     }
 
-
-
     .cta-button:hover {
       background-color: #f57c00;
     }
 
+    .fade-out {
+      animation: fadeOut 1s ease;
+      animation-fill-mode: forwards;
+    }
 
-
-
-
+    @keyframes fadeOut {
+      0% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      100% {
+        opacity: 0.5;
+        transform: translateY(-100%);
+      }
+    }
   </style>
 </head>
 <body>
@@ -100,6 +92,7 @@ body {
     // JavaScript code
 
     // Get references to the relevant HTML elements
+    const container = document.querySelector('.container');
     const streamSelect = document.getElementById('stream');
     const semesterSelect = document.getElementById('semester');
     const subjectSelect = document.getElementById('subjects');
@@ -150,24 +143,27 @@ body {
 
     // Display selected options in the input box
     submitBtn.addEventListener('click', function() {
-      const selectedStream = streamSelect.value;
-      const selectedSemester = semesterSelect.value;
-      const selectedSubject = subjectSelect.value;
+      container.classList.add('fade-out');
+      setTimeout(function() {
+        const selectedStream = streamSelect.value;
+        const selectedSemester = semesterSelect.value;
+        const selectedSubject = subjectSelect.value;
 
-      // Build the URL based on the selected options
-      let url = 'https://chinurag.github.io/';
+        // Build the URL based on the selected options
+        let url = 'https://chinurag.github.io/';
 
-      if (selectedStream === 'jmc') {
-        url += 'm/';
-      } else if (selectedStream === 'mba') {
-        url += 'm/';
-      } else if (selectedStream === 'mcom') {
-        url += 'm/';
-      }
-      url += `${selectedSemester.toLowerCase()}/${selectedSubject.toLowerCase()}.html`;
+        if (selectedStream === 'jmc') {
+          url += 'm/';
+        } else if (selectedStream === 'mba') {
+          url += 'm/';
+        } else if (selectedStream === 'mcom') {
+          url += 'm/';
+        }
+        url += `${selectedSemester.toLowerCase()}/${selectedSubject.toLowerCase()}.html`;
 
-      // Redirect the user to the generated URL
-      window.location.href = url;
+        // Redirect the user to the generated URL
+        window.location.href = url;
+      }, 1000);
     });
 
     // Helper function to populate a dropdown with options
